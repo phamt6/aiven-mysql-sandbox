@@ -16,14 +16,18 @@
 
 - [Getting Started](#getting-started)
 - [Python Example](#python-example)
-- [Sandbox project](#sandbox-project)
+- [NodeJS Example](#nodejs-example)
 - [Contributors](#contributors)
 - [Contributing to this document](#creators)
 
 ## Getting started
+You can easily sign up for an Aiven account and get $300 free credits with 30-day trial, allowing you to freely explore and assess what it has to offer. 
 
-Aiven for MySQL services are managed from the [Aiven Console](https://console.aiven.io/). 
+![image](./img/new-account.png)
 
+Aiven services are managed from [Aiven Console](https://console.aiven.io/) interface. This documentation will guide you to create a new **Aiven for MySQL** service and connect it to your application with a sample Python code snippet.
+
+## Aiven for MySQL
 Log in to the console with your email address and password. The Console opens in the Services, where you can see all the services in the currently selected project.
 
 To get started with Aiven for MySQL, first click the "Create a new service" button.
@@ -51,7 +55,7 @@ Note that while typically services start in a couple of minutes, the performance
 
 There are multiple ways you can try out your new MySQL service. From the command line, the easiest option might be the mysqlsh tool provided by Oracle, which can directly accept the service URL shown on the Service Overview page:
 
-```
+```console
 mysqlsh --sql mysql://avnadmin:giufg3yd1b89sqjb@rauli-mysql-dev-sandbox.aivencloud.com:12691/defaultdb?ssl-mode=REQUIRED
 
 MySQL ssl defaultdb SQL> select 1 + 2 as three;
@@ -82,7 +86,7 @@ To add database users, go to the service's **Users** tab. When adding a new user
 ## Python example
 This Python example uses the [PyMySQL](https://github.com/PyMySQL/PyMySQL) library for connecting to Aiven MySQL. The host, password and port values are just examples and you should replace them with whatever is shown for your own service.
 
-```
+```python
 import pymysql
 
 timeout = 10
@@ -110,9 +114,36 @@ finally:
     connection.close()
 ```
 
-## What should expect from this document
+## NodeJS example
 
-## Sandbox project 
+```javascript
+// establish connection with database
+const db = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PWD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+    ssl: {
+        ca: fs.readFileSync(__dirname + '/certs/ca.pem')
+    }
+});
+
+db.connect(err => {
+    if (err) throw err;
+    console.log('Connection to database established.');
+});
+
+app.get('/testdb', (req, res) => {
+    db.query('CREATE TABLE mytest (id INTEGER PRIMARY KEY)');
+    db.query('INSERT INTO mytest (id) VALUES (1), (2)');
+    db.query('SELECT * FROM mytest', (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send();
+    });
+})
+```
 
 ## Contributors
 
