@@ -29,19 +29,19 @@ This document will guide you to build a simple REST API service with NodeJS and 
 
 ## Getting started
 Here are the list of tools that we will be using to build our sandbox project:
-- [NodeJS]()
-- [Sequelize]()
-- [Visual Studio Code]() or your favourite IDE
+- [NodeJS](https://nodejs.org/en/download/)
+- [Sequelize](https://sequelize.org/master/)
+- [Visual Studio Code](https://code.visualstudio.com/) or your favourite IDE
 
 Other dependencies
-- [dotenv]()
-- [Express]()
-- [sequelize-cli]()
-- [fs]()
-- [mysql2]()
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [Express](https://www.npmjs.com/package/express)
+- [sequelize-cli](https://github.com/sequelize/cli)
+- [fs](https://www.npmjs.com/package/fs)
+- [mysql2](https://www.npmjs.com/package/mysql2)
 
 ## Requirements
-In order to make the most out of this guide, you are expected have some previous experience working with Javascript, general understanding of relational database. You will also need to install NodeJS on your working machine, create a free Aiven account to host your MySQL service. Further setup instructions for getting started with Aiven can be found from [Aiven Help](help.aiven.io)
+In order to make the most out of this guide, you are expected have some previous experience working with Javascript, general understanding of relational database. You will also need to install NodeJS on your working machine, create a free Aiven account to host your MySQL service. Further setup instructions for getting started with Aiven can be found from [Aiven Help](https://help.aiven.io/en/articles/2820646-getting-started-with-aiven-for-mysql)
 
 ## Project structure setup
 Initialize a new Node project is easy by running the command `npm init` within your Terminal, answer all of the questions and you are good to move on. The `npm` commands helps us to setup our project folder with the provided information from your answers, you will notice a new file has been created under your project folder as `package.json`, the content of which should look somewhat as in the following
@@ -102,9 +102,15 @@ Now we will initialize our Sequelize project by running the following command in
 npx sequelize-cli init
 ```
 
-The following folders have now been created under your project folder: **config**, **migrations**, **models**, **seeders**
+These folders have now been created under your project: 
+- **config**: contains config file, which tells CLI how to connect with database
+- **migrations**: contains all models for your project
+- **models**: contains all migration files
+- **seeders**: contains all seed files
 
-The `ca.pem` file is required to establish a connection with your Aiven for MySQL database and can be downloaded from the Aiven service interface and place it under the same `config` folder for easy reference. You should also create an `.env` file at the root of your project folder, and provide the following parameters from your Aiven Console so you can make a reference to them with the `dotenv` package.
+The `ca.pem` file is required to establish a connection with your **Aiven for MySQL** database and can be downloaded from the Aiven service interface and place it under the same `config` folder for easy reference. You will also need to create an `.env` file at the root of your project folder, and provide the following parameters (Database Name, Host, Port, User, Password) from your Aiven Console so you can make a reference to them with the `dotenv` package.
+
+![image](/img/aiven-config.png)
 
 Rename the `config.json` file to `config.js` and update its content to the following to instruct `sequelize` of how to connect to our database. 
 
@@ -180,7 +186,7 @@ Using environment "development".
 Database defaultdb_dev created.
 ```
 
-Okie dokie, now it is time to populate some data into our database. This process typically starts with creating a table within our connected database, by creating a `Model` as a representation of the table we are creating or update. We can achieve with the following command:
+Let's populate some data, starting with creating a table within our connected database. The CLI will help us create a `Model` which acts as a representation of the table we are creating or update. We can achieve with the following command:
 
 ```console
 npx sequelize-cli model:generate --name Post --attributes title:string,content:string,author:string
@@ -345,6 +351,6 @@ app.delete('/post/:author', (req, res) => {
 ```
 
 ## Final words
-If you sticked around until here and successfully executed our sample codes and commands, congratulations because you have successfully expanded your developer toolkit.
+If you sticked around until this point and successfully executed our sample codes and commands, congratulations because you have successfully expanded your developer toolkit.
 
 Keep calm and code on :metal:
