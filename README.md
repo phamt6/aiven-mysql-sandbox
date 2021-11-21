@@ -115,16 +115,17 @@ finally:
 ```
 
 ## NodeJS example
+This NodeJS example presents a popular approach for creating [Express](https://www.npmjs.com/package/express) application with [mysql](https://www.npmjs.com/package/mysql), [dotenv](https://www.npmjs.com/package/dotenv) packages. You are required to configure your environmental variables using `.env` file with your own personal authentication from the [Aiven Console](https://console.aiven.io/).
 
 ```javascript
 // establish connection with database
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
+    host	: process.env.DB_HOST,
+    user	: process.env.DB_USERNAME,
     password: process.env.DB_PWD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
-    ssl: {
+    port	: process.env.DB_PORT,
+    ssl		: {
         ca: fs.readFileSync(__dirname + '/certs/ca.pem')
     }
 });
