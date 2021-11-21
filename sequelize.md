@@ -25,7 +25,10 @@
 - [Final words](#final-words)
 
 ## Introduction
-This document will guide you to build a simple REST API service with NodeJS and utilize Aiven for MySQL service to flow data within your Express application with Sequelize as the ORM solution. Sequelize as a tool, supports Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server and lets developers to interact with their relational database using Javascript instead of writing SQL queries. ORMs such as Sequelize are designed to write correct and optimized SQL queries, easy to maintain and update, as well as provide more security from SQL injection attacks.
+This document will guide you to build a simple REST API service with NodeJS and utilize Aiven for MySQL service to flow data within your Express application with Sequelize as the ORM solution. Sequelize as a tool, supports Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server and lets developers interact with their relational database using Javascript instead of writing SQL queries. ORMs such as Sequelize are designed to write correct and optimized SQL queries, easy to maintain and update, as well as provide more security against SQL injection attacks.
+
+## Requirements
+In order to make the most out of this guide, you are expected have some previous experience working with Javascript, general understanding of relational database. You will also need to install NodeJS on your working machine, create a free Aiven account to host your MySQL service. Further setup instructions for getting started with Aiven can be found from [Aiven Help](https://help.aiven.io/en/articles/2820646-getting-started-with-aiven-for-mysql)
 
 ## Getting started
 Here are the list of tools that we will be using to build our sandbox project:
@@ -40,11 +43,8 @@ Other dependencies
 - [fs](https://www.npmjs.com/package/fs)
 - [mysql2](https://www.npmjs.com/package/mysql2)
 
-## Requirements
-In order to make the most out of this guide, you are expected have some previous experience working with Javascript, general understanding of relational database. You will also need to install NodeJS on your working machine, create a free Aiven account to host your MySQL service. Further setup instructions for getting started with Aiven can be found from [Aiven Help](https://help.aiven.io/en/articles/2820646-getting-started-with-aiven-for-mysql)
-
 ## Project structure setup
-Initialize a new Node project is easy by running the command `npm init` within your Terminal, answer all of the questions and you are good to move on. The `npm` commands helps us to setup our project folder with the provided information from your answers, you will notice a new file has been created under your project folder as `package.json`, the content of which should look somewhat as in the following
+Initialize a new Node project is easy by running the command `npm init` within your Terminal, answer all of the questions and you are good to move on. The `npm` commands helps us to setup our project folder with the provided information from your answers, a new file has been created under your project folder as `package.json`, the content of which should look somewhat as in the following
 
 ![image](./img/package-json-init.png)
 
@@ -53,17 +53,9 @@ Next we install the project dependencies with the following command
 npm install --save express dotenv sequelize fs mysql2
 ```
 
-Once the installation has completed, a new folder called `node_modules` is added under your project structure, where NPM keeps the source code of the packages you have just installed. And at the bottom of the `package.json` file, you will find the details of the dependencies that have been added to your current project.
+Once the installation is complete, a new folder called `node_modules` is added under your project structure, where NPM keeps the source code of installed packages. Within the `package.json` file, you will find the details of the dependencies that have been added to your current project.
 
 ![image](./img/dependencies.png)
-
-```text
-app/
-├── .gitignore
-├── .env
-├── index.js
-└── package.json
-```
 
 The `.env` file will be the place where we keep environment variables and protect secure information such as authentication data, port number, database host, etc.
 
@@ -348,6 +340,23 @@ app.delete('/post/:author', (req, res) => {
             if (err) console.log(err);
         })
 });
+```
+
+The final project folder structure is as following:
+```text
+app/
+├── config/
+│   ├── ca.pem
+│   └── config.js
+├── migrations/
+├── models/
+│   ├── index.js
+│   └── post.js
+├── seeders/
+├── .gitignore
+├── .env
+├── index.js
+└── package.json
 ```
 
 ## Final words
