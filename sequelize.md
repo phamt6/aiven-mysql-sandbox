@@ -353,4 +353,6 @@ app.delete('/post/:author', (req, res) => {
 ## Final words
 If you sticked around until this point and successfully executed our sample codes and commands, congratulations because you have successfully expanded your developer toolkit.
 
+Sample code implementation used in this guide can be found from <https://github.com/phamt6/sandbox-aiven.git>
+
 Keep calm and code on :metal:
