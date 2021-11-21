@@ -120,12 +120,12 @@ This NodeJS example presents a popular approach for creating [Express](https://w
 ```javascript
 // establish connection with database
 const db = mysql.createConnection({
-    host	 : process.env.DB_HOST,
-    user	 : process.env.DB_USERNAME,
+    host	: process.env.DB_HOST,
+    user	: process.env.DB_USERNAME,
     password : process.env.DB_PWD,
     database : process.env.DB_NAME,
-    port	 : process.env.DB_PORT,
-    ssl		 : {
+    port	: process.env.DB_PORT,
+    ssl		: {
         ca: fs.readFileSync(__dirname + '/certs/ca.pem')
     }
 });
